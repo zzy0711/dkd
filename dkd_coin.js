@@ -285,7 +285,7 @@ let url = {
         try {
          //$.log(str.replace('headerInfo":"',""))
     const result = JSON.parse(data)
-    console.log('🚫 '+result.status_code}
+    console.log('🚫 '+result.status_code)
         if(result.status_code == 200){
         console.log('开始刷新转抽奖页面，回执:成功🌝 剩余抽奖次数: '+result.data.times)
 }
