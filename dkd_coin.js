@@ -385,11 +385,12 @@ function dkddjs(timeout = 0) {
 //多看点提现
 function dkdtx(timeout = 0) {
   return new Promise((resolve) => {
-let str = dkdtxhd.match(/headerInfo":"\w+/)+''
+
 let url = {
         url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody,
-        headers : JSON.parse($.getdata('dkdtxhd')),
-        body : dkdtxbody,}
+        headers : JSON.parse(dkdhd),
+       // body : dkdtxbody,}
+       body : {"money":0.5,"type":2,"withdraw_card":null,"program":8,"is_special":1},}
       $.post(url, async (err, resp, data) => {
         try {
          //$.log(str.replace('headerInfo":"',""))
