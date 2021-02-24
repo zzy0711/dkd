@@ -8,8 +8,15 @@
 能力有限，自动刷小视频暂时无法完成
 本脚本以学习为主！
 建议通过HttpCanary抓取Cookie，搜索页面地址http://dkd-api.dysdk.com/user/index
+TG电报群: https://t.me/hahaha8028
+
+
+
 2021.02.01 加入自动提现功能
 获取方式，进入提现页面，选择需要自动提现的面额点击提现获取
+2021.02.04 修复转盘抽奖提示刷新的问题，加入赚钱抽奖自动刷新并显示抽奖剩余次数，加入观看十分钟视频奖励领取
+2021.02.07 任务加入小说时段奖励领取
+2021.02.08 修复小说时段奖励倒计时问题
 多看点自动任务
 */
 const exec = require('child_process').execSync
@@ -120,7 +127,7 @@ if(result.status_code == 10020){
     },timeout)
   })
 }
-
+/*
 function dkdyq(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
@@ -144,7 +151,7 @@ if(result.status_code == 10020){
     },timeout)
   })
 }
-
+*/
 //多看点视频宝箱翻倍     
 function dkdbxfb(timeout = 0) {
   return new Promise((resolve) => {
@@ -241,7 +248,81 @@ if(result.status_code == 10020){
       },timeout)
     })
   }
-  
+   //多看点视频时长
+  function dkdsc(timeout = 0) {
+    return new Promise((resolve) => {
+  let url = {
+          url : 'http://dkd-api.dysdk.com/task/get_ad_award',
+          headers : JSON.parse($.getdata('dkdhd')),
+          body : 'adType=2&'+dkdbody+'&type=1&overLimit',}
+        $.post(url, async (err, resp, data) => {
+          try {
+             //$.log(dkdbody)
+      const result = JSON.parse(data)
+          if(result.status_code == 200){
+          console.log('时长任务回执:成功🌝 '+result.data.award)
+  }
+  if(result.status_code == 10020){
+          console.log('时长任务回执:失败🚫 '+result.message)}
+          } catch (e) {
+            //$.logErr(e, resp);
+          } finally {
+            resolve()
+          }
+      },timeout)
+    })
+  } 
+
+ //多看点刷新转盘
+function dkdsxzp(timeout = 0) {
+  return new Promise((resolve) => {
+let sx = dkdtxhd.match(/headerInfo":"\w+/)+''
+let url = {
+       url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody+'&headerInfo='+sx.replace('headerInfo":"',""),
+        headers : JSON.parse(dkdhd),
+        body : '',}
+      $.post(url, async (err, resp, data) => {
+        try {
+         //$.log(str.replace('headerInfo":"',""))
+    const result = JSON.parse(data)
+        if(result.status_code == 200){
+        console.log('开始刷新转抽奖页面，回执:成功🌝 剩余抽奖次数: '+result.data.times)
+}
+if(result.status_code == 10020){
+        console.log('开始刷新抽奖页面，回执:失败🚫 '+result.message)}
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+ //多看点小说时段奖励
+function dkdsdjl(timeout = 0) {
+  return new Promise((resolve) => {
+
+let url = {
+        url : 'http://dkd-api.dysdk.com/video/extra_get',
+        headers : JSON.parse(dkdhd),
+        body : dkdbody,}
+      $.post(url, async (err, resp, data) => {
+        try {
+         //$.log(str.replace('headerInfo":"',""))
+    const result = JSON.parse(data)
+        if(result.status_code == 200){
+        console.log('开始领取小说时段奖励，回执:成功🌝    '+result.data.award)
+}
+if(result.status_code == 10020){
+        console.log('开始领取小说时段奖励，回执:失败🚫 '+result.message)}
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
   //多看点
   function dkdyq(timeout = 0) {
     return new Promise((resolve) => {
@@ -260,32 +341,26 @@ if(result.status_code == 10020){
           }
       },timeout)
     })
+  }							   
+
+function dkddjs(timeout = 0) {
+    return new Promise((resolve) => {
+  let url = {
+          url : 'http://dkd-api.dysdk.com/video/extra_time',
+          headers : JSON.parse(dkdhd),
+          body : dkdbody,}
+        $.post(url, async (err, resp, data) => {
+          try {
+             //$.log(dkdbody)
+      const result = JSON.parse(data)
+          } catch (e) {
+            //$.logErr(e, resp);
+          } finally {
+            resolve()
+          }
+      },timeout)
+    })
   }
-
-function dkdsxzp(timeout = 0) {
-  return new Promise((resolve) => {
-let url = {
-        url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody,
-        headers : JSON.parse(dkdhd),
-        body : '{}',}
-      $.post(url, async (err, resp, data) => {
-        try {
-         //$.log(str.replace('headerInfo":"',""))
-    const result = JSON.parse(data)
-        if(result.status_code == 200){
-        console.log('开始刷新转抽奖页面，回执:成功🌝 剩余抽奖次数: '+result.data.times)
-}
-if(result.status_code == 10020){
-        console.log('开始刷新抽奖页面，回执:失败🚫 '+result.message)}
-        } catch (e) {
-          //$.logErr(e, resp);
-        } finally {
-          resolve()
-        }
-    },timeout)
-  })
-}
-
   function dkdz(timeout = 0) {
     return new Promise((resolve) => {
   let url = {
@@ -388,19 +463,24 @@ let url = {
 if(result.status_code == 10020){
         console.log('签到回执:失败🚫 '+result.message)
 
-}$.msg($.name,"",'多看点开始🖨')
+}
+//$.msg($.name,"",'多看点开始🖨')
           
 await dkdgg()
-//await dkdbxsx()
+await dkdsc()
 await dkdbx()
 await dkdbxfb()
-//await dkdsxzp()
+await dkdsxzp()
 await dkdcj()
 await dkdfx()
-await dkdyq()
-//await dkdz()        
+
+      
 await dkdxs()
+await dkddjs()
+await dkdsdjl()
 await dkdxx()
+await dkdz()			
+await dkdyq()
 await dkdtx() 
 
         } catch (e) {
