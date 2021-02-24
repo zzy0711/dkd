@@ -276,15 +276,16 @@ if(result.status_code == 10020){
   //多看点刷新转盘
 function dkdsxzp(timeout = 0) {
   return new Promise((resolve) => {
-let sx = dkdtxhd.match(/headerInfo":"\w+/)+''
+
 let url = {
         url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody,
         headers : JSON.parse(dkdhd),
-        body : '{}',}
+        body : '',}
       $.post(url, async (err, resp, data) => {
         try {
          //$.log(str.replace('headerInfo":"',""))
     const result = JSON.parse(data)
+    console.log('🚫 '+result}
         if(result.status_code == 200){
         console.log('开始刷新转抽奖页面，回执:成功🌝 剩余抽奖次数: '+result.data.times)
 }
