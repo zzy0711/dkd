@@ -334,10 +334,6 @@ if(result.status_code == 10020){
           try {
              //$.log(dkdbody)
       const result = JSON.parse(data)
-      if(result.status_code == 200){
-        console.log('邀请，回执:成功🌝    '+result.message)}
-            if(result.status_code == 10020){
-        console.log('邀请，回执:失败🚫 '+result.message)}
           } catch (e) {
             //$.logErr(e, resp);
           } finally {
@@ -394,7 +390,7 @@ let url = {
         url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody,
         headers : JSON.parse(dkdhd),
        // body : dkdtxbody,}
-       body : {"money":0.5,"type":2,"withdraw_card":null,"program":8,"is_special":1},}
+       body : '{"money":0.5,"type":2,"withdraw_card":null,"program":8,"is_special":1}',}
       $.post(url, async (err, resp, data) => {
         try {
          //$.log(str.replace('headerInfo":"',""))
