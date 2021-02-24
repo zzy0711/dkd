@@ -253,7 +253,7 @@ if(result.status_code == 10020){
     return new Promise((resolve) => {
   let url = {
           url : 'http://dkd-api.dysdk.com/task/get_ad_award',
-          headers : JSON.parse($.getdata('dkdhd')),
+          headers : JSON.parse(dkdhd),
           body : 'adType=2&'+dkdbody+'&type=1&overLimit',}
         $.post(url, async (err, resp, data) => {
           try {
