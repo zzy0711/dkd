@@ -285,7 +285,6 @@ let url = {
         try {
          //$.log(str.replace('headerInfo":"',""))
     const result = JSON.parse(data)
-    console.log('🚫 '+result.status_code)
         if(result.status_code == 200){
         console.log('开始刷新转抽奖页面，回执:成功🌝 剩余抽奖次数: '+result.data.times)
 }
@@ -388,7 +387,7 @@ function dkdtx(timeout = 0) {
   return new Promise((resolve) => {
 let str = dkdtxhd.match(/headerInfo":"\w+/)+''
 let url = {
-        url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody+'&headerInfo='+str.replace('headerInfo":"',""),
+        url : 'http://dkd-api.dysdk.com/money/withdraw_do?'+dkdbody,
         headers : JSON.parse($.getdata('dkdtxhd')),
         body : dkdtxbody,}
       $.post(url, async (err, resp, data) => {
