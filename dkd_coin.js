@@ -278,8 +278,8 @@ function dkdsxzp(timeout = 0) {
   return new Promise((resolve) => {
 let sx = dkdtxhd.match(/headerInfo":"\w+/)+''
 let url = {
-        url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody+'&headerInfo='+sx.replace('headerInfo":"',""),
-        headers : JSON.parse($.getdata('dkdhd')),
+        url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody,
+        headers : JSON.parse(dkdhd),
         body : '',}
       $.post(url, async (err, resp, data) => {
         try {
@@ -470,7 +470,7 @@ await dkdgg()
 await dkdsc()
 await dkdbx()
 await dkdbxfb()
-//await dkdsxzp()
+await dkdsxzp()
 await dkdcj()
 await dkdfx()
 
