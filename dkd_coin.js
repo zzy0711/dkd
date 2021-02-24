@@ -280,7 +280,7 @@ let sx = dkdtxhd.match(/headerInfo":"\w+/)+''
 let url = {
         url : 'http://dkd-api.dysdk.com/lotto/index?'+dkdbody,
         headers : JSON.parse(dkdhd),
-        body : '',}
+        body : '{}',}
       $.post(url, async (err, resp, data) => {
         try {
          //$.log(str.replace('headerInfo":"',""))
