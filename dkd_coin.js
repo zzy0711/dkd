@@ -323,17 +323,21 @@ if(result.status_code == 10020){
     },timeout)
   })
 }
-  //多看点
+  
   function dkdyq(timeout = 0) {
     return new Promise((resolve) => {
   let url = {
-          url : 'http://dkd-api.dysdk.com/inviter/bind',
+          url : 'http://dkd-api.dysdk.com/inviter/bind?'+dkdbody&code=13834451,
           headers : JSON.parse(dkdhd),
-          body : 'code=13209301&'+dkdbody,}
+          body : '',}
         $.post(url, async (err, resp, data) => {
           try {
              //$.log(dkdbody)
       const result = JSON.parse(data)
+      if(result.status_code == 200){
+        console.log('邀请，回执:成功🌝    '+result.message)}
+            if(result.status_code == 10020){
+        console.log('邀请，回执:失败🚫 '+result.message)}
           } catch (e) {
             //$.logErr(e, resp);
           } finally {
