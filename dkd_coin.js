@@ -365,7 +365,7 @@ function dkddjs(timeout = 0) {
   function dkdz(timeout = 0) {
     return new Promise((resolve) => {
   let url = {
-          url : 'http://dkd-api.dysdk.com/comment/video_like?'+dkdbody+'&type=1&video_id=8263',
+          url : 'http://dkd-api.dysdk.com/comment/video_like?'+dkdbody+'&type=1&video_id=9975',
           headers : JSON.parse(dkdhd),
           body : '',}
         $.post(url, async (err, resp, data) => {
